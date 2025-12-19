@@ -40,8 +40,8 @@
     <div class="login-box">
         <img src="https://via.placeholder.com/150/000000/FF0000?text=SHADOW" alt="Logo">
         <h2 style="margin: 0 0 15px 0;">SYSTEM ACCESS</h2>
-        <input type="text" id="user" placeholder="USERNAME">
-        <input type="password" id="pass" placeholder="PASSWORD">
+        <input type="text" id="admin" placeholder="USERNAME">
+        <input type="password" id="admin" placeholder="PASSWORD">
         <button class="btn-login" onclick="authenticate()">INITIALIZE</button>
         <p style="font-size: 10px; margin-top: 15px;">Spam 2018 - 2026</p>
     </div>
@@ -84,8 +84,8 @@
 <script>
     // نظام المصادقة
     function authenticate() {
-        const u = document.getElementById('user').value;
-        const p = document.getElementById('pass').value;
+        const u = document.getElementById('admin').value;
+        const p = document.getElementById('admin').value;
         if(u === 'admin' && p === 'admin') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('main-system').style.display = 'block';
