@@ -3,65 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPAM DDOS!!! - SATAN SPAM</title>
+    <title>SPAM DDOS FUCK</title>
     <style>
-        :root { --main-red: #ff0000; --bg-black: #050505; --shadow: 0 0 25px #ff0000; }
+        :root { --main-red: #ff0000; --bg-black: #050505; --shadow: 0 0 20px #ff0000; }
         body { background-color: var(--bg-black); color: var(--main-red); font-family: 'Courier New', Courier, monospace; margin: 0; overflow: hidden; }
         
         /* LOGIN STYLING */
-        #login-screen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; transition: 0.5s; z-index: 100; position: relative; }
-        .login-box { background: #000; border: 2px solid var(--main-red); padding: 35px; border-radius: 5px; box-shadow: var(--shadow); text-align: center; width: 320px; }
-        .login-box img { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--main-red); margin-bottom: 20px; filter: grayscale(100%) contrast(200%); }
-        input { width: 90%; padding: 12px; margin: 10px 0; background: #0a0a0a; border: 1px solid var(--main-red); color: #fff; text-align: center; outline: none; font-weight: bold; }
-        .btn-login { width: 100%; padding: 12px; background: var(--main-red); border: none; color: #000; font-weight: 900; cursor: pointer; text-transform: uppercase; }
-        .btn-login:hover { background: #fff; box-shadow: 0 0 15px #fff; }
+        #login-screen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; transition: 0.5s; }
+        .login-box { background: #000; border: 2px solid var(--main-red); padding: 30px; border-radius: 10px; box-shadow: var(--shadow); text-align: center; width: 300px; }
+        .login-box img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--main-red); margin-bottom: 15px; }
+        input { width: 90%; padding: 10px; margin: 10px 0; background: #111; border: 1px solid var(--main-red); color: #fff; text-align: center; outline: none; }
+        .btn-login { width: 100%; padding: 10px; background: var(--main-red); border: none; color: #000; font-weight: bold; cursor: pointer; }
+        .btn-login:hover { background: #fff; box-shadow: 0 0 10px #fff; }
 
-        /* MAIN TERMINAL STYLING */
+        /* MAIN TERMINAL STYLING (Hidden by default) */
         #main-system { display: none; }
-        .sidenav { height: 100%; width: 0; position: fixed; z-index: 200; top: 0; left: 0; background-color: #000; border-right: 2px solid var(--main-red); overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
-        .sidenav a, .drop-btn { padding: 15px 25px; text-decoration: none; font-size: 18px; color: var(--main-red); display: block; background: none; border: none; width: 100%; text-align: left; cursor: pointer; font-weight: bold; }
-        .sidenav a:hover, .drop-btn:hover { background: #200; color: #fff; box-shadow: inset 0 0 10px #ff0000; }
-        .drop-container { display: none; background: #0a0a0a; padding-left: 10px; border-left: 2px solid var(--main-red); }
+        .sidenav { height: 100%; width: 0; position: fixed; z-index: 2; top: 0; left: 0; background-color: #000; border-right: 2px solid var(--main-red); overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
+        .sidenav a, .drop-btn { padding: 15px 25px; text-decoration: none; font-size: 18px; color: var(--main-red); display: block; background: none; border: none; width: 100%; text-align: left; cursor: pointer; }
+        .sidenav a:hover, .drop-btn:hover { background: #200; color: #fff; }
+        .drop-container { display: none; background: #111; padding-left: 20px; }
         
-        .menu-trigger { font-size: 35px; cursor: pointer; position: fixed; top: 20px; left: 20px; z-index: 150; text-shadow: var(--shadow); }
-        .terminal-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; background: radial-gradient(circle, #1a0000 0%, #050505 100%); }
+        .menu-trigger { font-size: 30px; cursor: pointer; position: fixed; top: 20px; left: 20px; z-index: 1; }
+        .terminal-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
         
-        .target-input { width: 60%; padding: 20px; background: #000; border: 3px solid var(--main-red); color: #0f0; font-size: 24px; text-shadow: 0 0 8px #0f0; margin-bottom: 25px; outline: none; text-align: center; }
-        .kill-btn { padding: 25px 100px; font-size: 45px; background: var(--main-red); color: #000; font-weight: 900; border: none; cursor: pointer; box-shadow: var(--shadow); transition: 0.1s; letter-spacing: 5px; }
-        .kill-btn:active { transform: scale(0.9); box-shadow: 0 0 60px var(--main-red); }
+        .target-input { width: 50%; padding: 20px; background: #000; border: 3px solid var(--main-red); color: #0f0; font-size: 24px; text-shadow: 0 0 5px #0f0; margin-bottom: 20px; outline: none; }
+        .kill-btn { padding: 25px 80px; font-size: 40px; background: var(--main-red); color: #000; font-weight: 900; border: none; cursor: pointer; box-shadow: var(--shadow); transition: 0.2s; }
+        .kill-btn:active { transform: scale(0.95); box-shadow: 0 0 50px var(--main-red); }
 
-        .footer-tag { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 14px; color: #fff; font-weight: bold; letter-spacing: 2px; }
-        .status-log { margin-top: 25px; color: #0f0; font-size: 15px; max-height: 150px; overflow-y: hidden; width: 70%; text-align: left; padding: 10px; background: rgba(0,0,0,0.8); border: 1px solid #333; }
+        .footer-tag { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 12px; opacity: 0.7; }
+        .status-log { margin-top: 20px; color: #fff; font-size: 14px; max-height: 100px; overflow-y: auto; width: 60%; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
     <div class="login-box">
-        <img src="https://via.placeholder.com/150/000000/FF0000?text=SATAN" alt="Logo">
-        <h2 style="margin: 0 0 15px 0; letter-spacing: 3px;">WELCOME BRO</h2>
-        <input type="text" id="user" placeholder="IDENTITY">
-        <input type="password" id="pass" placeholder="ACCESS KEY">
-        <button class="btn-login" onclick="authenticate()">LOG IN</button>
-        <p style="font-size: 12px; margin-top: 15px; color: #555;">Spam 2018 - 2026</p>
+        <img src="https://via.placeholder.com/150/000000/FF0000?text=SHADOW" alt="Logo">
+        <h2 style="margin: 0 0 15px 0;">SYSTEM ACCESS</h2>
+        <input type="text" id="user" placeholder="USERNAME">
+        <input type="password" id="pass" placeholder="PASSWORD">
+        <button class="btn-login" onclick="authenticate()">INITIALIZE</button>
+        <p style="font-size: 10px; margin-top: 15px;">Spam 2018 - 2026</p>
     </div>
 </div>
 
 <div id="main-system">
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" onclick="closeNav()" style="font-size: 40px; text-align: right;">&times;</a>
-        <div style="color: #fff; padding: 15px 25px; border-bottom: 2px solid var(--main-red); font-weight: 900;">SUPPORT</div>
+        <a href="javascript:void(0)" onclick="closeNav()" style="font-size: 36px; text-align: right;">&times;</a>
+        <div style="color: #fff; padding: 10px 25px; border-bottom: 1px solid var(--main-red);">SUPPORT CENTER</div>
         <a href="https://t.me/your_user">TELEGRAM ACCOUNT</a>
         <a href="https://t.me/your_channel">TELEGRAM CHANNEL</a>
         
-        <button class="drop-btn" onclick="toggleDrop()">DEVELOPER [v]</button>
+        <button class="drop-btn" onclick="toggleDrop()">DEVELOPER [+]</button>
         <div id="drop-menu" class="drop-container">
-            <a href="https://t.me/your_user">CONTACT DEVELOPER</a>
-            <a href="https://t.me/your_channel">JOIN COMMUNITY</a>
+            <a href="https://t.me/your_user">DM ME</a>
+            <a href="https://t.me/your_channel">JOIN CHANNEL</a>
         </div>
         
-        <div style="position: absolute; bottom: 30px; width: 100%; text-align: center; font-size: 12px; color: #ff0000;">
-            SYSTEM STATUS: ARMED<br>
+        <div style="position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 10px;">
             Spam 2018 - 2026
         </div>
     </div>
@@ -69,10 +68,10 @@
     <span class="menu-trigger" onclick="openNav()">&#9776;</span>
 
     <div class="terminal-content">
-        <h1 style="font-size: 60px; margin-bottom: 5px; text-shadow: var(--shadow);">KILL SWITCH</h1>
-        <p style="color: #fff; margin-bottom: 45px; letter-spacing: 5px;">PROTOCOL: DDOS V888</p>
+        <h1 style="font-size: 50px; margin-bottom: 10px;">DDOS ATTACK PANEL</h1>
+        <p style="color: #fff; margin-bottom: 40px;">STATUS: STANDBY... READY TO KILL</p>
         
-        <input type="text" id="target-url" class="target-input" placeholder="ENTER TARGET HOST / IP">
+        <input type="text" id="target-url" class="target-input" placeholder="TARGET URL OR IP">
         <br>
         <button class="kill-btn" onclick="triggerKill()">KILL</button>
         
@@ -83,22 +82,20 @@
 </div>
 
 <script>
-    // نظام المصادقة المعدل
+    // نظام المصادقة
     function authenticate() {
         const u = document.getElementById('user').value;
         const p = document.getElementById('pass').value;
-        
-        // البيانات الجديدة سيدي
         if(u === 'SATAN' && p === 'SPAM2008') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('main-system').style.display = 'block';
         } else {
-            alert('INVALID CREDENTIALS. SYSTEM LOCKDOWN IMMINENT.');
+            alert('CRITICAL ERROR: ACCESS DENIED');
         }
     }
 
     // التحكم في القائمة
-    function openNav() { document.getElementById("mySidenav").style.width = "300px"; }
+    function openNav() { document.getElementById("mySidenav").style.width = "280px"; }
     function closeNav() { document.getElementById("mySidenav").style.width = "0"; }
     function toggleDrop() {
         const d = document.getElementById("drop-menu");
@@ -108,20 +105,20 @@
     // محرك الهجوم
     function triggerKill() {
         const target = document.getElementById('target-url').value;
-        if(!target) { alert('TARGET HOST MISSING'); return; }
+        if(!target) { alert('TARGET REQUIRED'); return; }
         
         const log = document.getElementById('log');
-        log.innerHTML = "<span style='color:red;'>[!] INITIATING CRITICAL OVERLOAD...</span><br>";
+        log.innerHTML = "STARTING AGGRESSIVE FLOOD...<br>";
         
+        // محاكاة تقنية للإغراق
         setInterval(() => {
             const p = document.createElement('div');
-            const packetId = Math.floor(Math.random() * 999999);
-            p.innerHTML = [${new Date().toLocaleTimeString()}] <span style='color:white;'>PAYLOAD SENT</span> -> ${target} | PID: ${packetId} | SIZE: 65500 | <span style='color:red;'>[SUCCESS]</span>;
+            p.innerHTML = [SENDING] => PACKET_SIZE: 65500 | BYTES TO ${target} | STATUS: [OVERLOADED];
             log.prepend(p);
-            if(log.childNodes.length > 15) log.removeChild(log.lastChild);
-        }, 30);
+            if(log.childNodes.length > 10) log.removeChild(log.lastChild);
+        }, 50);
 
-        alert('ATTACK DISPATCHED TO: ' + target);
+        alert('KILL PROTOCOL ACTIVATED ON: ' + target);
     }
 </script>
 
