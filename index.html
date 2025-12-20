@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XSPAM V888 - ULTIMATE DESTRUCTION</title>
+    <title>XSPAM V888 - SHADOW MODE</title>
     <style>
         :root {
             --primary-red: #ff0000;
             --shadow-black: #000000;
             --pure-white: #ffffff;
-            --gray-text: #888888;
         }
 
         body, html {
@@ -17,13 +16,13 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Consolas', 'Courier New', monospace;
             background: var(--shadow-black);
             color: var(--pure-white);
+            font-family: 'Consolas', monospace;
             overflow: hidden;
         }
 
-        /* Video Background with blur */
+        /* Video Background */
         #video-bg {
             position: fixed;
             top: 0;
@@ -32,48 +31,29 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            filter: blur(8px) brightness(0.3);
+            filter: blur(5px) brightness(0.3);
         }
 
-        /* Global Overlay for Atmosphere */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent 20%, black 150%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* LOGIN SCREEN */
+        /* Login Screen */
         #login-screen {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background: rgba(0,0,0,0.6);
             z-index: 100;
         }
 
-        .login-card {
+        .login-box {
             background: rgba(0, 0, 0, 0.95);
             padding: 50px;
             border: 2px solid var(--pure-white);
             text-align: center;
             width: 350px;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.5s;
         }
 
-        .login-card h1 {
-            font-size: 24px;
-            letter-spacing: 8px;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
-        }
-
-        .login-card input {
+        .login-box input {
             width: 100%;
             padding: 15px;
             margin: 10px 0;
@@ -82,158 +62,113 @@
             color: white;
             outline: none;
             box-sizing: border-box;
-            transition: 0.3s;
         }
 
-        .login-card input:focus {
-            border-color: var(--pure-white);
-            background: #1a1a1a;
-        }
-
-        .login-card button {
+        .login-box button {
             width: 100%;
             padding: 15px;
-            margin-top: 25px;
+            margin-top: 20px;
             background: var(--pure-white);
             color: black;
             border: none;
-            font-weight: 900;
             cursor: pointer;
-            letter-spacing: 2px;
-            transition: 0.3s;
+            font-weight: 900;
+            text-transform: uppercase;
         }
 
-        .login-card button:hover {
-            letter-spacing: 5px;
-            box-shadow: 0 0 20px var(--pure-white);
-        }
-
-        /* Access Granted Flash */
-        .flash-red {
+        /* Success Flash */
+        .success-glow {
             border-color: var(--primary-red) !important;
-            box-shadow: 0 0 60px var(--primary-red) !important;
-            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--primary-red) !important;
         }
 
-        /* ATTACK INTERFACE */
+        /* Attack Interface */
         #attack-panel {
             display: none;
+            padding: 20px;
             height: 100vh;
-            padding: 30px;
             box-sizing: border-box;
-            position: relative;
         }
 
         /* Stats Bar */
-        .header-stats {
+        .stats-bar {
             display: flex;
             justify-content: space-around;
             background: rgba(255, 0, 0, 0.1);
             border: 1px solid var(--primary-red);
             padding: 15px;
             margin-bottom: 20px;
-            font-size: 14px;
             color: var(--primary-red);
-            text-transform: uppercase;
-            box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
         /* Console */
         .console-container {
-            height: calc(100vh - 250px);
             border: 1px solid var(--primary-red);
-            background: url('console_bg.jpg') no-repeat center;
-            background-size: cover;
+            height: calc(100vh - 280px);
+            background: rgba(0, 0, 0, 0.85); /* Fallback to image if provided */
             position: relative;
+            overflow: hidden;
         }
 
-        .console-inner {
-            background: rgba(0, 0, 0, 0.88);
+        #con-logs {
             height: 100%;
-            width: 100%;
             padding: 20px;
-            box-sizing: border-box;
             overflow-y: auto;
             color: var(--primary-red);
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 14px;
         }
 
         /* Controls */
-        .control-btns {
+        .ctrl-btns {
             margin-top: 15px;
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
 
-        .ctrl-btn {
+        .btn {
+            padding: 10px 25px;
             background: black;
             border: 1px solid var(--primary-red);
             color: var(--primary-red);
-            padding: 10px 30px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.2s;
         }
 
-        .ctrl-btn:hover {
-            background: var(--primary-red);
-            color: black;
-            box-shadow: 0 0 15px var(--primary-red);
-        }
+        .btn:hover { background: var(--primary-red); color: black; }
 
-        /* Command Input Area */
-        .command-zone {
-            margin-top: 20px;
-        }
-
-        .prompt-line {
-            color: var(--primary-red);
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .input-wrapper {
-            display: flex;
-            align-items: center;
-        }
-
-        .input-wrapper span {
-            color: var(--primary-red);
-            margin-right: 10px;
-            font-size: 18px;
-        }
-
-        #cmd-input {
+        /* Command Input */
+        .command-area { margin-top: 20px; }
+        .prompt-text { color: var(--primary-red); margin-bottom: 5px; }
+        .input-box { display: flex; align-items: center; }
+        #target-input {
             background: transparent;
             border: none;
             color: var(--primary-red);
-            font-family: inherit;
-            font-size: 18px;
-            width: 90%;
             outline: none;
+            width: 90%;
+            font-size: 18px;
         }
 
         /* Sidebar */
-        #side-menu {
+        #sidebar {
             position: fixed;
-            left: -320px;
+            right: -320px;
             top: 0;
             width: 300px;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            border-right: 2px solid var(--primary-red);
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: black;
+            border-left: 2px solid var(--primary-red);
+            transition: 0.3s;
             z-index: 1000;
-            padding-top: 50px;
+            padding-top: 60px;
         }
 
-        .side-active { left: 0 !important; }
+        .side-open { right: 0 !important; }
 
-        .menu-trigger {
+        .menu-icon {
             position: fixed;
             top: 20px;
-            right: 30px;
+            right: 25px;
             font-size: 35px;
             color: var(--primary-red);
             cursor: pointer;
@@ -241,281 +176,187 @@
             display: none;
         }
 
-        .menu-link {
-            padding: 20px 30px;
+        .menu-item {
+            padding: 20px;
             border-bottom: 1px solid #222;
             cursor: pointer;
-            display: block;
-            text-decoration: none;
             color: white;
-            font-weight: bold;
-            transition: 0.3s;
+            text-decoration: none;
+            display: block;
         }
 
-        .menu-link:hover {
-            background: var(--primary-red);
-            color: black;
-            padding-left: 50px;
-        }
+        .menu-item:hover { background: var(--primary-red); color: black; }
 
-        /* Sub-screens (Modals) */
-        .sub-screen {
+        /* Modals */
+        .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            z-index: 2000;
-            padding: 50px;
-            box-sizing: border-box;
-            text-align: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: black; z-index: 2000; padding: 50px; text-align: center;
         }
 
-        .sub-screen h2 {
-            color: var(--primary-red);
-            font-size: 30px;
-            margin-bottom: 50px;
-            text-decoration: underline;
-        }
-
-        .support-item {
-            margin: 30px 0;
-            font-size: 20px;
-        }
-
-        .tg-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 25px;
-            background: #0088cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .close-sub {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: var(--primary-red);
-            font-size: 40px;
-            cursor: pointer;
-        }
-
-        .buy-item {
-            display: block;
-            width: 300px;
-            margin: 15px auto;
-            padding: 20px;
-            background: #111;
-            border: 1px solid #333;
-            color: #555;
-            cursor: not-allowed;
-        }
-
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 40px; color: var(--primary-red); cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <video autoplay loop id="video-bg">
+    <video autoplay muted loop id="video-bg">
         <source src="background_video.mp4" type="video/mp4">
     </video>
-    <div class="overlay"></div>
 
     <!-- Login -->
     <div id="login-screen">
-        <div class="login-card" id="loginCard">
-            <h1>XSPAM ADMIN</h1>
-            <input type="text" id="userIn" placeholder="USERNAME" autocomplete="off">
-            <input type="password" id="passIn" placeholder="PASSWORD">
-            <button onclick="attemptLogin()">ENTER THE VOID</button>
+        <div class="login-box" id="loginBox">
+            <h1>XSPAM ACCESS</h1>
+            <input type="text" id="userInput" placeholder="USERNAME" autocomplete="off">
+            <input type="password" id="passInput" placeholder="PASSWORD">
+            <button onclick="checkAuth()">AUTHORIZE</button>
         </div>
     </div>
 
-    <!-- Menu Button -->
-    <div class="menu-trigger" id="menuBtn" onclick="toggleSidebar()">☰</div>
-
-    <!-- Sidebar -->
-    <div id="side-menu">
-        <div class="menu-link" onclick="openSub('support-screen')">SUPPORT TEAM</div>
-        <div class="menu-link" onclick="openSub('buy-screen')">BUY SPAM SERVER</div>
-        <div class="menu-link" onclick="openSub('channel-screen')">CHANNEL</div>
+    <!-- Interface -->
+    <div class="menu-icon" id="menuBtn" onclick="toggleSide()">☰</div>
+    <div id="sidebar">
+        <div class="menu-item" onclick="openModal('supportM')">SUPPORT TEAM</div>
+        <div class="menu-item" onclick="openModal('buyM')">BUY SPAM SERVER</div>
+        <div class="menu-item" onclick="openModal('channelM')">CHANNEL</div>
     </div>
 
-    <!-- Attack Interface -->
     <div id="attack-panel">
-        <div class="header-stats">
-            <div>SYSTEM: <span id="ram-stat">4096</span>MB / 32GB</div>
-            <div>STATUS: <span style="color:white">READY</span></div>
-            <div>STRENGTH: <span style="color:white">MAXIMUM</span></div>
+        <div class="stats-bar">
+            <div>RAM: <span id="ramStat">0</span>MB</div>
+            <div>POWER: MAX</div>
             <div>ATTACKS: UNLIMITED</div>
         </div>
 
         <div class="console-container">
-            <div class="console-inner" id="con-logs">
-                <div style="color: #00ff00;">[STATUS] XSPAM KERNEL V8.8.8 LOADED...</div>
-                <div style="color: #00ff00;">[STATUS] READY FOR DEPLOYMENT.</div>
+            <div id="con-logs">
+                <div style="color:white">[SYSTEM INFO] WAITING FOR TARGET...</div>
             </div>
         </div>
 
-        <div class="control-btns">
-            <button class="ctrl-btn" onclick="fireAttack()">START ATTACK</button>
-            <button class="ctrl-btn" onclick="clearCon()">RESET</button>
-            <button class="ctrl-btn" onclick="haltAttack()">STOP</button>
+        <div class="ctrl-btns">
+            <button class="btn" onclick="startAttack()">START</button>
+            <button class="btn" onclick="resetAll()">RESET</button>
+            <button class="btn" onclick="stopAttack()">STOP</button>
         </div>
 
-        <div class="command-zone">
-            <div class="prompt-line">┏─━[XSPAM@SATAN]</div>
-            <div class="input-wrapper">
-                <span>┕━─⩥</span>
-                <input type="text" id="cmd-input" placeholder="ENTER TARGET URL OR IP">
+        <div class="command-area">
+            <div class="prompt-text">┏─━[XSPAM@SATAN]</div>
+            <div class="input-box">
+                <span style="color:red; margin-right:10px;">┕━─⩥</span>
+                <input type="text" id="target-input" placeholder="WRITE A COMMAND (TARGET)">
             </div>
         </div>
     </div>
 
-    <!-- Sub Screens (Modals) -->
-    <!-- Support -->
-    <div id="support-screen" class="sub-screen">
-        <div class="close-sub" onclick="closeSub()">×</div>
+    <!-- Modals -->
+    <div id="supportM" class="modal">
+        <span class="close-btn" onclick="closeModal()">×</span>
         <h2>SUPPORT TEAM</h2>
-        <div class="support-item">
-            <div>𝐌𝐀𝐋𝐈𝐊 𝐒𝐏𝐀𝐌</div>
-            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
-        </div>
-        <div class="support-item">
-            <div>𝐒𝐀𝐌𝐊𝐀 𝐒𝐏𝐀𝐌</div>
-            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
-        </div>
-        <div class="support-item">
-            <div>𝐓𝐄𝐑𝐁𝐎 𝐒𝐏𝐀𝐌</div>
-            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
-        </div>
-        <div class="support-item">
-            <div>𝐃𝐄𝐕: 𝐒𝐀𝐓𝐀𝐍 𝐒𝐏𝐀𝐌</div>
-            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
+        <div style="margin-top:20px;">
+            <h3>𝐌𝐀𝐋𝐈𝐊 𝐒𝐏𝐀𝐌</h3><button class="btn" onclick="window.open('https://t.me/your_user')">Telegram</button><br><br>
+            <h3>𝐒𝐀𝐌𝐊𝐀 𝐒𝐏𝐀𝐌</h3><button class="btn" onclick="window.open('https://t.me/your_user')">Telegram</button><br><br>
+            <h3>𝐓𝐄𝐑𝐁𝐎 𝐒𝐏𝐀𝐌</h3><button class="btn" onclick="window.open('https://t.me/your_user')">Telegram</button><br><br>
+            <h3>𝐃𝐄𝐕: 𝐒𝐀𝐓𝐀𝐍 𝐒𝐏𝐀𝐌</h3><button class="btn" onclick="window.open('https://t.me/your_user')">Telegram</button>
         </div>
     </div>
 
-    <!-- Buy Server -->
-    <div id="buy-screen" class="sub-screen">
-        <div class="close-sub" onclick="closeSub()">×</div>
+    <div id="buyM" class="modal">
+        <span class="close-btn" onclick="closeModal()">×</span>
         <h2>BUY SPAM SERVER</h2>
-        <button class="buy-item" onclick="window.location.href='https://t.me/your_telegram'">SERVER 1 - NOT AVAILABLE</button>
-        <button class="buy-item" onclick="window.location.href='https://t.me/your_telegram'">SERVER 2 - NOT AVAILABLE</button>
-        <button class="buy-item" onclick="window.location.href='https://t.me/your_telegram'">SERVER 3 - NOT AVAILABLE</button>
+        <button class="btn" style="width:100%; margin:10px 0;">PLAN A - NOT AVAILABLE</button>
+        <button class="btn" style="width:100%; margin:10px 0;">PLAN B - NOT AVAILABLE</button>
     </div>
 
-    <!-- Channel -->
-    <div id="channel-screen" class="sub-screen">
-        <div class="close-sub" onclick="closeSub()">×</div>
+    <div id="channelM" class="modal">
+        <span class="close-btn" onclick="closeModal()">×</span>
         <h2>CHANNEL</h2>
-        <div style="margin-top: 100px;">
-            <button class="ctrl-btn" style="font-size: 25px;" onclick="window.open('https://t.me/your_channel')">JOIN XSPAM CHANNEL</button>
-        </div>
+        <button class="btn" style="font-size:30px;" onclick="window.open('https://t.me/your_channel')">XSPAM CHANNEL</button>
     </div>
 
     <script>
-        let attackRunning = false;
-        let attackLoop;
+        let attackActive = false;
+        let loop;
 
-        // Login Logic
-        function attemptLogin() {
-            const u = document.getElementById('userIn').value;
-            const p = document.getElementById('passIn').value;
-            const card = document.getElementById('loginCard');
+        function checkAuth() {
+            const u = document.getElementById('userInput').value;
+            const p = document.getElementById('passInput').value;
 
-            if(u === "xspamadmin" && p === "satansndspamcom") {
-                card.classList.add('flash-red');
+            // مسار التحقق المباشر
+            if (u === "xspamadmin" && p === "satansndspamcom") {
+                document.getElementById('loginBox').classList.add('success-glow');
                 setTimeout(() => {
                     document.getElementById('login-screen').style.display = 'none';
                     document.getElementById('attack-panel').style.display = 'block';
                     document.getElementById('menuBtn').style.display = 'block';
-                    document.getElementById('video-bg').muted = false; // Video sound starts
-                    startRamSim();
+                    document.getElementById('video-bg').muted = false; // تشغيل الصوت
+                    startRam();
                 }, 800);
             } else {
-                alert("ACCESS DENIED: INCORRECT CREDENTIALS");
+                alert("ACCESS DENIED");
             }
         }
 
-        // Sidebar Control
-        function toggleSidebar() {
-            document.getElementById('side-menu').classList.toggle('side-active');
+        function addLog(msg, color = "red") {
+            const logs = document.getElementById('con-logs');
+            const d = document.createElement('div');
+            d.style.color = color;
+            d.innerText = > ${msg};
+            logs.appendChild(d);
+            logs.scrollTop = logs.scrollHeight;
         }
 
-        // Sub Screens
-        function openSub(id) {
-            document.getElementById(id).style.display = 'block';
-            toggleSidebar();
-        }
-
-        function closeSub() {
-            const screens = document.querySelectorAll('.sub-screen');
-            screens.forEach(s => s.style.display = 'none');
-        }
-
-        // Console Actions
-        function addLog(msg, color = 'red') {
-            const con = document.getElementById('con-logs');
-            const div = document.createElement('div');
-            div.style.color = color;
-            div.innerHTML = [${new Date().toLocaleTimeString()}] ${msg};
-            con.appendChild(div);
-            con.scrollTop = con.scrollHeight;
-        }
-
-        function fireAttack() {
-            const target = document.getElementById('cmd-input').value;
-            if(!target) {
-                addLog("ERROR: TARGET MISSING", "white");
-                return;
-            }
-
-            const packets = prompt("ENTER AMOUNT OF PACKETS TO SEND:", "50000");
-            addLog(ANALYZING TARGET: ${target}..., "yellow");
+        function startAttack() {
+            const target = document.getElementById('target-input').value;
+            if(!target) return addLog("ERROR: NO TARGET", "white");
+            
+            const num = prompt("HOW MANY ATTACKS?");
+            addLog(ANALYZING ${target}..., "yellow");
             
             setTimeout(() => {
-                addLog(VULNERABILITY FOUND: CVE-2025-XSPAM, "orange");
-                addLog(INJECTING MALICIOUS PAYLOAD..., "orange");
-                
-                attackRunning = true;
-                attackLoop = setInterval(() => {
-                    if(attackRunning) {
-                        const methods = ["HTTP-FLOOD", "UDP-DRAIN", "SYN-STORM", "BYPASS-V2"];
-                        const m = methods[Math.floor(Math.random()*methods.length)];
-                        addLog(ATTACKING -> ${target} via ${m} | STATUS: 200 OK (DEAD));
-                    }
-                }, 50);
+                addLog("VULNERABILITIES FOUND. SENDING POWERFUL EXPLOITS...", "orange");
+                attackActive = true;
+                loop = setInterval(() => {
+                    if(attackActive) addLog(ATTACKING ${target} | PACKETS: SENT | STATUS: 503);
+                }, 100);
             }, 1500);
         }
 
-        function haltAttack() {
-            attackRunning = false;
-            clearInterval(attackLoop);
-            addLog("ATTACK SEQUENCE TERMINATED.", "white");
+        function stopAttack() {
+            attackActive = false;
+            clearInterval(loop);
+            addLog("ATTACK STOPPED.", "white");
         }
 
-        function clearCon() {
-            document.getElementById('con-logs').innerHTML = '<div style="color: #00ff00;">[STATUS] KERNEL RESET COMPLETED.</div>';
-            haltAttack();
+        function resetAll() {
+            document.getElementById('con-logs').innerHTML = '';
+            document.getElementById('target-input').value = '';
+            stopAttack();
         }
 
-        // Ram Simulator
-        function startRamSim() {
+        function toggleSide() {
+            document.getElementById('sidebar').classList.toggle('side-open');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+            toggleSide();
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+        }
+
+        function startRam() {
             setInterval(() => {
-                const r = Math.floor(Math.random() * (12000 - 8000) + 8000);
-                document.getElementById('ram-stat').innerText = r;
-            }, 1500);
+                document.getElementById('ramStat').innerText = Math.floor(Math.random()*8000 + 4000);
+            }, 2000);
         }
 
-        // Enter key to trigger attack
-        document.getElementById('cmd-input').addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') fireAttack();
+        document.getElementById('target-input').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') startAttack();
         });
-
     </script>
 </body>
 </html>
