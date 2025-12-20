@@ -1,212 +1,521 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHADOW SYSTEM V888</title>
+    <title>XSPAM V888 - ULTIMATE DESTRUCTION</title>
     <style>
-        :root { --main-red: #ff0000; --bg-black: #050505; --shadow: 0 0 20px #ff0000; }
-        body { background-color: var(--bg-black); color: var(--main-red); font-family: 'Courier New', Courier, monospace; margin: 0; overflow: hidden; }
-        
-        /* LOGIN STYLING */
-        #login-screen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 100%; position: absolute; top: 0; left: 0; z-index: 999; background: var(--bg-black); }
-        .login-box { background: #000; border: 2px solid var(--main-red); padding: 30px; border-radius: 10px; box-shadow: var(--shadow); text-align: center; width: 300px; }
-        
-        /* الصورة الخاصة بك */
-        .login-box img { width: 120px; height: 120px; border-radius: 10px; border: 2px solid var(--main-red); margin-bottom: 15px; object-fit: cover; box-shadow: 0 0 10px var(--main-red); }
-        
-        input { width: 90%; padding: 10px; margin: 10px 0; background: #111; border: 1px solid var(--main-red); color: #fff; text-align: center; outline: none; }
-        .btn-login { width: 100%; padding: 10px; background: var(--main-red); border: none; color: #000; font-weight: bold; cursor: pointer; }
-        .btn-login:hover { background: #fff; box-shadow: 0 0 10px #fff; }
+        :root {
+            --primary-red: #ff0000;
+            --shadow-black: #000000;
+            --pure-white: #ffffff;
+            --gray-text: #888888;
+        }
 
-        /* MAIN TERMINAL STYLING */
-        #main-system { display: none; height: 100vh; width: 100%; position: relative; }
-        .sidenav { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: #000; border-right: 2px solid var(--main-red); overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
-        .sidenav a, .drop-btn { padding: 15px 25px; text-decoration: none; font-size: 18px; color: var(--main-red); display: block; background: none; border: none; width: 100%; text-align: left; cursor: pointer; }
-        .sidenav a:hover, .drop-btn:hover { background: #200; color: #fff; }
-        .drop-container { display: none; background: #111; padding-left: 20px; }
-        
-        .menu-trigger { font-size: 30px; cursor: pointer; position: fixed; top: 20px; left: 20px; z-index: 10; }
-        .terminal-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
-        
-        .target-input { width: 50%; padding: 20px; background: #000; border: 3px solid var(--main-red); color: #0f0; font-size: 24px; text-shadow: 0 0 5px #0f0; margin-bottom: 20px; outline: none; }
-        .kill-btn { padding: 25px 80px; font-size: 40px; background: var(--main-red); color: #000; font-weight: 900; border: none; cursor: pointer; box-shadow: var(--shadow); transition: 0.2s; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: var(--shadow-black);
+            color: var(--pure-white);
+            overflow: hidden;
+        }
 
-        .footer-tag { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 12px; opacity: 0.7; }
-        .status-log { margin-top: 20px; color: #fff; font-size: 14px; max-height: 100px; overflow-y: auto; width: 60%; }
+        /* Video Background with blur */
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: blur(8px) brightness(0.3);
+        }
+
+        /* Global Overlay for Atmosphere */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, black 150%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* LOGIN SCREEN */
+        #login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .login-card {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 50px;
+            border: 2px solid var(--pure-white);
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .login-card h1 {
+            font-size: 24px;
+            letter-spacing: 8px;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #111;
+            border: 1px solid #444;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        .login-card input:focus {
+            border-color: var(--pure-white);
+            background: #1a1a1a;
+        }
+
+        .login-card button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+            background: var(--pure-white);
+            color: black;
+            border: none;
+            font-weight: 900;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .login-card button:hover {
+            letter-spacing: 5px;
+            box-shadow: 0 0 20px var(--pure-white);
+        }
+
+        /* Access Granted Flash */
+        .flash-red {
+            border-color: var(--primary-red) !important;
+            box-shadow: 0 0 60px var(--primary-red) !important;
+            transform: scale(1.05);
+        }
+
+        /* ATTACK INTERFACE */
+        #attack-panel {
+            display: none;
+            height: 100vh;
+            padding: 30px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Stats Bar */
+        .header-stats {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid var(--primary-red);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Console */
+        .console-container {
+            height: calc(100vh - 250px);
+            border: 1px solid var(--primary-red);
+            background: url('console_bg.jpg') no-repeat center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .console-inner {
+            background: rgba(0, 0, 0, 0.88);
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            color: var(--primary-red);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* Controls */
+        .control-btns {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .ctrl-btn {
+            background: black;
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+            padding: 10px 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .ctrl-btn:hover {
+            background: var(--primary-red);
+            color: black;
+            box-shadow: 0 0 15px var(--primary-red);
+        }
+
+        /* Command Input Area */
+        .command-zone {
+            margin-top: 20px;
+        }
+
+        .prompt-line {
+            color: var(--primary-red);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper span {
+            color: var(--primary-red);
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        #cmd-input {
+            background: transparent;
+            border: none;
+            color: var(--primary-red);
+            font-family: inherit;
+            font-size: 18px;
+            width: 90%;
+            outline: none;
+        }
+
+        /* Sidebar */
+        #side-menu {
+            position: fixed;
+            left: -320px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            border-right: 2px solid var(--primary-red);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            padding-top: 50px;
+        }
+
+        .side-active { left: 0 !important; }
+
+        .menu-trigger {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 35px;
+            color: var(--primary-red);
+            cursor: pointer;
+            z-index: 1001;
+            display: none;
+        }
+
+        .menu-link {
+            padding: 20px 30px;
+            border-bottom: 1px solid #222;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .menu-link:hover {
+            background: var(--primary-red);
+            color: black;
+            padding-left: 50px;
+        }
+
+        /* Sub-screens (Modals) */
+        .sub-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 2000;
+            padding: 50px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .sub-screen h2 {
+            color: var(--primary-red);
+            font-size: 30px;
+            margin-bottom: 50px;
+            text-decoration: underline;
+        }
+
+        .support-item {
+            margin: 30px 0;
+            font-size: 20px;
+        }
+
+        .tg-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 25px;
+            background: #0088cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .close-sub {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--primary-red);
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .buy-item {
+            display: block;
+            width: 300px;
+            margin: 15px auto;
+            padding: 20px;
+            background: #111;
+            border: 1px solid #333;
+            color: #555;
+            cursor: not-allowed;
+        }
+
     </style>
 </head>
 <body>
 
-<div id="login-screen">
-    <div class="login-box">
-        <img src="https://files.catbox.moe/1yhcqz.png" alt="SATAN LOGO">
-        <h2 style="margin: 0 0 15px 0;">SYSTEM ACCESS</h2>
-        <input type="text" id="user_input" placeholder="USERNAME" autocomplete="off">
-        <input type="password" id="pass_input" placeholder="PASSWORD">
-        <button class="btn-login" onclick="authenticate()">INITIALIZE</button>
-        <p style="font-size: 10px; margin-top: 15px;">Spam 2018 - 2026</p>
-    </div>
-</div>
+    <video autoplay loop id="video-bg">
+        <source src="background_video.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
 
-<div id="main-system">
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" onclick="closeNav()" style="font-size: 36px; text-align: right;">&times;</a>
-        <div style="color: #fff; padding: 10px 25px; border-bottom: 1px solid var(--main-red);">SUPPORT CENTER</div>
-        <a href="https://t.me/your_user">TELEGRAM ACCOUNT</a>
-        <a href="https://t.me/your_channel">TELEGRAM CHANNEL</a>
-        
-        <button class="drop-btn" onclick="toggleDrop()">DEVELOPER [+]</button>
-        <div id="drop-menu" class="drop-container">
-            <a href="https://t.me/your_user">DM ME</a>
-            <a href="https://t.me/your_channel">JOIN CHANNEL</a>
-        </div>
-        
-        <div style="position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 10px;">
-            Spam 2018 - 2026
+    <!-- Login -->
+    <div id="login-screen">
+        <div class="login-card" id="loginCard">
+            <h1>XSPAM ADMIN</h1>
+            <input type="text" id="userIn" placeholder="USERNAME" autocomplete="off">
+            <input type="password" id="passIn" placeholder="PASSWORD">
+            <button onclick="attemptLogin()">ENTER THE VOID</button>
         </div>
     </div>
 
-    <span class="menu-trigger" onclick="openNav()">&#9776;</span>
+    <!-- Menu Button -->
+    <div class="menu-trigger" id="menuBtn" onclick="toggleSidebar()">☰</div>
 
-    <div class="terminal-content">
-        <h1 style="font-size: 50px; margin-bottom: 10px;">DDOS ATTACK PANEL</h1>
-        <p style="color: #fff; margin-bottom: 40px;">STATUS: STANDBY... READY TO KILL</p>
-        
-        <input type="text" id="target-url" class="target-input" placeholder="TARGET URL OR IP">
-        <br>
-        <button class="kill-btn" onclick="triggerKill()">KILL</button>
-        
-        <div id="log" class="status-log"></div>
+    <!-- Sidebar -->
+    <div id="side-menu">
+        <div class="menu-link" onclick="openSub('support-screen')">SUPPORT TEAM</div>
+        <div class="menu-link" onclick="openSub('buy-screen')">BUY SPAM SERVER</div>
+        <div class="menu-link" onclick="openSub('channel-screen')">CHANNEL</div>
     </div>
-    
-    <div class="footer-tag">Spam 2018 - 2026</div>
-</div>
 
-<script>
-    function authenticate() {
-        const u = document.getElementById('user_input').value.trim();
-        const p = document.getElementById('pass_input').value.trim();
+    <!-- Attack Interface -->
+    <div id="attack-panel">
+        <div class="header-stats">
+            <div>SYSTEM: <span id="ram-stat">4096</span>MB / 32GB</div>
+            <div>STATUS: <span style="color:white">READY</span></div>
+            <div>STRENGTH: <span style="color:white">MAXIMUM</span></div>
+            <div>ATTACKS: UNLIMITED</div>
+        </div>
 
-        // المصادقة بالبيانات التي طلبتها
-        if(u === 'SATAN' && p === 'SPAM2008') {
-            document.getElementById('login-screen').style.setProperty('display', 'none', 'important');
-            document.getElementById('main-system').style.display = 'block';
-        } else {
-            alert('CRITICAL ERROR: ACCESS DENIED');
+        <div class="console-container">
+            <div class="console-inner" id="con-logs">
+                <div style="color: #00ff00;">[STATUS] XSPAM KERNEL V8.8.8 LOADED...</div>
+                <div style="color: #00ff00;">[STATUS] READY FOR DEPLOYMENT.</div>
+            </div>
+        </div>
+
+        <div class="control-btns">
+            <button class="ctrl-btn" onclick="fireAttack()">START ATTACK</button>
+            <button class="ctrl-btn" onclick="clearCon()">RESET</button>
+            <button class="ctrl-btn" onclick="haltAttack()">STOP</button>
+        </div>
+
+        <div class="command-zone">
+            <div class="prompt-line">┏─━[XSPAM@SATAN]</div>
+            <div class="input-wrapper">
+                <span>┕━─⩥</span>
+                <input type="text" id="cmd-input" placeholder="ENTER TARGET URL OR IP">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub Screens (Modals) -->
+    <!-- Support -->
+    <div id="support-screen" class="sub-screen">
+        <div class="close-sub" onclick="closeSub()">×</div>
+        <h2>SUPPORT TEAM</h2>
+        <div class="support-item">
+            <div>𝐌𝐀𝐋𝐈𝐊 𝐒𝐏𝐀𝐌</div>
+            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
+        </div>
+        <div class="support-item">
+            <div>𝐒𝐀𝐌𝐊𝐀 𝐒𝐏𝐀𝐌</div>
+            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
+        </div>
+        <div class="support-item">
+            <div>𝐓𝐄𝐑𝐁𝐎 𝐒𝐏𝐀𝐌</div>
+            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
+        </div>
+        <div class="support-item">
+            <div>𝐃𝐄𝐕: 𝐒𝐀𝐓𝐀𝐍 𝐒𝐏𝐀𝐌</div>
+            <a href="https://t.me/your_telegram" class="tg-link">CONTACT VIA TELEGRAM</a>
+        </div>
+    </div>
+
+    <!-- Buy Server -->
+    <div id="buy-screen" class="sub-screen">
+        <div class="close-sub" onclick="closeSub()">×</div>
+        <h2>BUY SPAM SERVER</h2>
+        <button class="buy-item" onclick="window.location.href='https://t.me/your_telegram'">SERVER 1 - NOT AVAILABLE</button>
+        <button class="buy-item" onclick="window.location.href='https://t.me/your_telegram'">SERVER 2 - NOT AVAILABLE</button>
+        <button class="buy-item" onclick="window.location.href='https://t.me/your_telegram'">SERVER 3 - NOT AVAILABLE</button>
+    </div>
+
+    <!-- Channel -->
+    <div id="channel-screen" class="sub-screen">
+        <div class="close-sub" onclick="closeSub()">×</div>
+        <h2>CHANNEL</h2>
+        <div style="margin-top: 100px;">
+            <button class="ctrl-btn" style="font-size: 25px;" onclick="window.open('https://t.me/your_channel')">JOIN XSPAM CHANNEL</button>
+        </div>
+    </div>
+
+    <script>
+        let attackRunning = false;
+        let attackLoop;
+
+        // Login Logic
+        function attemptLogin() {
+            const u = document.getElementById('userIn').value;
+            const p = document.getElementById('passIn').value;
+            const card = document.getElementById('loginCard');
+
+            if(u === "xspamadmin" && p === "satansndspamcom") {
+                card.classList.add('flash-red');
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('attack-panel').style.display = 'block';
+                    document.getElementById('menuBtn').style.display = 'block';
+                    document.getElementById('video-bg').muted = false; // Video sound starts
+                    startRamSim();
+                }, 800);
+            } else {
+                alert("ACCESS DENIED: INCORRECT CREDENTIALS");
+            }
         }
-    }
 
-    function openNav() { document.getElementById("mySidenav").style.width = "280px"; }
-    function closeNav() { document.getElementById("mySidenav").style.width = "0"; }
-    function toggleDrop() {
-        const d = document.getElementById("drop-menu");
-        d.style.display = (d.style.display === "block") ? "none" : "block";
-    }
-
-    function triggerKill() {
-        const target = document.getElementById('target-url').value;
-        if(!target) { alert('TARGET REQUIRED'); return; }
-        
-        const log = document.getElementById('log');
-        log.innerHTML = "STARTING AGGRESSIVE FLOOD...<br>";
-        
-        setInterval(() => {
-            const p = document.createElement('div');
-            p.innerHTML = [SENDING] => PACKET_SIZE: 65500 | BYTES TO ${target} | STATUS: [OVERLOADED];
-            log.prepend(p);
-            if(log.childNodes.length > 10) log.removeChild(log.lastChild);
-        }, 50);
-
-        alert('KILL PROTOCOL ACTIVATED ON: ' + target);
-    }
-</script>
-
-</body>
-</html><body>
-
-<div id="login-screen">
-    <div class="login-box">
-        <img src="hhttps://files.catbox.moe/1yhcqz.png" alt="Logo">
-        <h2 style="margin: 0 0 15px 0;">SYSTEM ACCESS</h2>
-        <input type="text" id="user" placeholder="USERNAME">
-        <input type="password" id="pass" placeholder="PASSWORD">
-        <button class="btn-login" onclick="authenticate()">LOGIN</button>
-        <p style="font-size: 10px; margin-top: 15px;">Spam 2018 - 2026</p>
-    </div>
-</div>
-
-<div id="main-system">
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" onclick="closeNav()" style="font-size: 36px; text-align: right;">&times;</a>
-        <div style="color: #fff; padding: 10px 25px; border-bottom: 1px solid var(--main-red);">SUPPORT CENTER</div>
-        <a href="https://t.me/your_user">TELEGRAM ACCOUNT</a>
-        <a href="https://t.me/your_channel">TELEGRAM CHANNEL</a>
-        
-        <button class="drop-btn" onclick="toggleDrop()">DEVELOPER [+]</button>
-        <div id="drop-menu" class="drop-container">
-            <a href="https://t.me/your_user">DM ME</a>
-            <a href="https://t.me/your_channel">JOIN CHANNEL</a>
-        </div>
-        
-        <div style="position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 10px;">
-            Spam 2018 - 2026
-        </div>
-    </div>
-
-    <span class="menu-trigger" onclick="openNav()">&#9776;</span>
-
-    <div class="terminal-content">
-        <h1 style="font-size: 50px; margin-bottom: 10px;">DDOS ATTACK PANEL</h1>
-        <p style="color: #fff; margin-bottom: 40px;">STATUS: STANDBY... READY TO KILL</p>
-        
-        <input type="text" id="target-url" class="target-input" placeholder="TARGET URL OR IP">
-        <br>
-        <button class="kill-btn" onclick="triggerKill()">KILL</button>
-        
-        <div id="log" class="status-log"></div>
-    </div>
-    
-    <div class="footer-tag">Spam 2018 - 2026</div>
-</div>
-
-<script>
-    function authenticate() {
-        const u = document.getElementById('user').value;
-        const p = document.getElementById('pass').value;
-        // التعديل هنا: استخدام البيانات الجديدة
-        if(u === 'SATAN' && p === 'SPAM2008') {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('main-system').style.display = 'block';
-        } else {
-            alert('CRITICAL ERROR: ACCESS DENIED');
+        // Sidebar Control
+        function toggleSidebar() {
+            document.getElementById('side-menu').classList.toggle('side-active');
         }
-    }
 
-    function openNav() { document.getElementById("mySidenav").style.width = "280px"; }
-    function closeNav() { document.getElementById("mySidenav").style.width = "0"; }
-    function toggleDrop() {
-        const d = document.getElementById("drop-menu");
-        d.style.display = (d.style.display === "block") ? "none" : "block";
-    }
+        // Sub Screens
+        function openSub(id) {
+            document.getElementById(id).style.display = 'block';
+            toggleSidebar();
+        }
 
-    function triggerKill() {
-        const target = document.getElementById('target-url').value;
-        if(!target) { alert('TARGET REQUIRED'); return; }
-        
-        const log = document.getElementById('log');
-        log.innerHTML = "STARTING AGGRESSIVE FLOOD...<br>";
-        
-        setInterval(() => {
-            const p = document.createElement('div');
-            p.innerHTML = [SENDING] => PACKET_SIZE: 65500 | BYTES TO ${target} | STATUS: [OVERLOADED];
-            log.prepend(p);
-            if(log.childNodes.length > 10) log.removeChild(log.lastChild);
-        }, 50);
+        function closeSub() {
+            const screens = document.querySelectorAll('.sub-screen');
+            screens.forEach(s => s.style.display = 'none');
+        }
 
-        alert('KILL PROTOCOL ACTIVATED ON: ' + target);
-    }
-</script>
+        // Console Actions
+        function addLog(msg, color = 'red') {
+            const con = document.getElementById('con-logs');
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.innerHTML = [${new Date().toLocaleTimeString()}] ${msg};
+            con.appendChild(div);
+            con.scrollTop = con.scrollHeight;
+        }
 
+        function fireAttack() {
+            const target = document.getElementById('cmd-input').value;
+            if(!target) {
+                addLog("ERROR: TARGET MISSING", "white");
+                return;
+            }
+
+            const packets = prompt("ENTER AMOUNT OF PACKETS TO SEND:", "50000");
+            addLog(ANALYZING TARGET: ${target}..., "yellow");
+            
+            setTimeout(() => {
+                addLog(VULNERABILITY FOUND: CVE-2025-XSPAM, "orange");
+                addLog(INJECTING MALICIOUS PAYLOAD..., "orange");
+                
+                attackRunning = true;
+                attackLoop = setInterval(() => {
+                    if(attackRunning) {
+                        const methods = ["HTTP-FLOOD", "UDP-DRAIN", "SYN-STORM", "BYPASS-V2"];
+                        const m = methods[Math.floor(Math.random()*methods.length)];
+                        addLog(ATTACKING -> ${target} via ${m} | STATUS: 200 OK (DEAD));
+                    }
+                }, 50);
+            }, 1500);
+        }
+
+        function haltAttack() {
+            attackRunning = false;
+            clearInterval(attackLoop);
+            addLog("ATTACK SEQUENCE TERMINATED.", "white");
+        }
+
+        function clearCon() {
+            document.getElementById('con-logs').innerHTML = '<div style="color: #00ff00;">[STATUS] KERNEL RESET COMPLETED.</div>';
+            haltAttack();
+        }
+
+        // Ram Simulator
+        function startRamSim() {
+            setInterval(() => {
+                const r = Math.floor(Math.random() * (12000 - 8000) + 8000);
+                document.getElementById('ram-stat').innerText = r;
+            }, 1500);
+        }
+
+        // Enter key to trigger attack
+        document.getElementById('cmd-input').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') fireAttack();
+        });
+
+    </script>
 </body>
 </html>
